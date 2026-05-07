@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View, Text, FlatList, TouchableOpacity,
-  ActivityIndicator, Image
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+  Image,
 } from 'react-native';
 import styles from '../components/style';
 
@@ -12,14 +16,15 @@ export default function ProductList({ route, navigation }) {
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/category/${category}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setProducts(data);
         setLoading(false);
       });
   }, []);
 
-  if (loading) return <ActivityIndicator size="large" style={{ marginTop: 50 }} />;
+  if (loading)
+    return <ActivityIndicator size="large" style={{ marginTop: 50 }} />;
 
   return (
     <View style={styles.screen}>
@@ -37,11 +42,11 @@ export default function ProductList({ route, navigation }) {
           >
             <Image
               source={{ uri: item.image }}
-              style={{ width: 80, height: 80, alignSelf: 'center' }}
+              style={styles.productImage}
               resizeMode="contain"
             />
             <Text numberOfLines={2}>{item.title}</Text>
-            <Text>Price: ${item.price}</Text>
+            <Text style={styles.priceText}>Price: ${item.price}</Text>
           </TouchableOpacity>
         )}
       />

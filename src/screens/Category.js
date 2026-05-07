@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import styles from '../components/style';
 
 export default function Category({ navigation }) {
@@ -8,14 +14,15 @@ export default function Category({ navigation }) {
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products/categories')
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setCategories(data);
         setLoading(false);
       });
   }, []);
 
-  if (loading) return <ActivityIndicator size="large" style={{ marginTop: 50 }} />;
+  if (loading)
+    return <ActivityIndicator size="large" style={{ marginTop: 50 }} />;
 
   return (
     <View style={styles.screen}>
@@ -31,7 +38,7 @@ export default function Category({ navigation }) {
             style={styles.card}
             onPress={() => navigation.navigate('Products', { category: item })}
           >
-            <Text style={{ textAlign: 'center' }}>{item.toUpperCase()}</Text>
+            <Text style={styles.categoryText}>{item.toUpperCase()}</Text>
           </TouchableOpacity>
         )}
       />
