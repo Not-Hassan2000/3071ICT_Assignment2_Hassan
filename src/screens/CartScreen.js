@@ -6,6 +6,9 @@ import {
   decreaseQuantity,
 } from '../redux/cartSlice';
 import styles from '../components/style';
+import { Alert } from 'react-native';
+import { createOrder } from '../redux/orderSlice';
+import { clearCart } from '../redux/cartSlice';
 
 export default function CartScreen() {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -70,6 +73,16 @@ export default function CartScreen() {
           </View>
         )}
       />
+      <TouchableOpacity
+  style={styles.button}
+  onPress={() => {
+    dispatch(createOrder(cartItems));
+    dispatch(clearCart());
+    Alert.alert('Success', 'Order Created');
+  }}
+>
+  <Text style={styles.buttonText}>Check Out</Text>
+</TouchableOpacity>
     </View>
   );
 }
